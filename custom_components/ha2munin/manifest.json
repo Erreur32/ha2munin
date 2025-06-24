@@ -1,0 +1,9 @@
+{
+  "domain": "ha2munin",
+  "name": "HA to Munin",
+  "version": "0.1.0",
+  "documentation": "https://github.com/tonrepo/ha2munin",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": ["@ton_pseudo"]
+}
