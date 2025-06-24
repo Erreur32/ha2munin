@@ -1,4 +1,5 @@
 from homeassistant.components.http import HomeAssistantView
+from aiohttp.web_response import Response
 
 DOMAIN = "ha2munin"
 
@@ -11,7 +12,7 @@ class MuninAPI(HomeAssistantView):
     name = "api:munin"
 
     async def get(self, request):
-        # Exemple : récupère quelques sensors connus
+        # Liste de sensors à exporter
         entity_ids = [
             "sensor.system_monitor_processor_use",
             "sensor.system_monitor_memory_usage",
@@ -31,6 +32,6 @@ class MuninAPI(HomeAssistantView):
         for eid in entity_ids:
             state = request.app["hass"].states.get(eid)
             data[eid] = state.state if state else "U"
-        # Retourne sous forme texte (façon plugin Munin)
+        # Formate pour Munin : un label par ligne, format "<nom>.value <valeur>"
         lines = [f"{eid.replace('sensor.system_monitor_', '')}.value {val}" for eid, val in data.items()]
-        return self.json({"output": "\n".join(lines)})
+        return Response(text="\n".join(lines), content_type="text/plain")
