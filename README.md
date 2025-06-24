@@ -1,5 +1,10 @@
 # HA2Munin
 
+![Munin Logo](custom_components/ha2munin/icon.png)
+
+![Munin Logo](https://raw.githubusercontent.com/Erreur32/ha2munin/main/custom_components/ha2munin/icon.png)
+
+
 Expose facilement les statistiques de Home Assistant (CPU, RAM, températures, etc) au format compatible Munin, via une simple endpoint HTTP.
 
 ---
