@@ -1,10 +1,11 @@
 {
   "domain": "ha2munin",
   "name": "HA to Munin",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "documentation": "https://github.com/Erreur32/ha2munin",
   "requirements": [],
   "dependencies": [],
   "codeowners": ["@Erreur32"],
+  "config_flow": true,
   "icon": "icon.png"
 }
