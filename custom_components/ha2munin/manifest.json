@@ -5,5 +5,6 @@
   "documentation": "https://github.com/Erreur32/ha2munin",
   "requirements": [],
   "dependencies": [],
-  "codeowners": ["@Erreur32"]
+  "codeowners": ["@Erreur32"],
+  "icon": "icon.png"
 }
