@@ -1,8 +1,13 @@
+![HACS Custom](https://img.shields.io/badge/HACS-Custom-orange)
+![GitHub Repo stars](https://img.shields.io/github/stars/Erreur32/ha2munin?style=social)
+![GitHub forks](https://img.shields.io/github/forks/Erreur32/ha2munin?style=social)
+![MIT License](https://img.shields.io/badge/license-MIT-blue)
+
+
+
 # HA2Munin
 
-![Munin Logo](custom_components/ha2munin/icon.png)
-
-![Munin Logo](https://raw.githubusercontent.com/Erreur32/ha2munin/main/custom_components/ha2munin/ha2munin.png)
+<img src="https://raw.githubusercontent.com/Erreur32/ha2munin/main/custom_components/ha2munin/ha2munin.png" alt="Munin Logo" width="32"/>
 
 
 Expose facilement les statistiques de Home Assistant (CPU, RAM, températures, etc) au format compatible Munin, via une simple endpoint HTTP.
