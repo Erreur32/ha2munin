@@ -29,6 +29,7 @@ Ajout dans HACS
 -   Ouvre HACS → “Intégrations” → “Dépôts personnalisés”
 -   Ajoute : https://github.com/Erreur32/ha2munin
 -   Installe l’intégration depuis HACS
+-   Et ajouter depuis integration le plugin (no config)
 
 ## Utilisation
 
@@ -36,8 +37,35 @@ L’intégration expose les valeurs sur :
 
 ```bash
 http://<homeassistant>:8123/api/munin
-
 ```
+## Creation Plugin munin
+
+Pour les authorisation créer un token via Homeassistant (/profile/security)
+
+Créer ansuite le Script Bash pour Munin 
+
+`/usr/share/munin/plugins/ha2munin` avec ce contenu :
+```bash
+#!/bin/bash
+
+# Adresse et token
+HA_URL="http://x.x.x.x:8123/api/munin"
+TOKEN=""
+
+if [ "$1" = "config" ]; then
+    echo "graph_title Home Assistant system_monitor"
+    echo "graph_category homeassistant"
+    curl -s -H "Authorization: Bearer $TOKEN" "$HA_URL" | grep '\.value' | while read line; do
+        name=$(echo "$line" | cut -d. -f1)
+        echo "$name.label $name"
+    done
+    exit 0
+fi
+
+curl -s -H "Authorization: Bearer $TOKEN" "$HA_URL" | grep '\.value'
+```
+
+
 
 ## TODO
 
