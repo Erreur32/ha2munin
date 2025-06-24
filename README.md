@@ -42,9 +42,13 @@ http://<homeassistant>:8123/api/munin
 
 Pour les authorisation créer un token via Homeassistant (/profile/security)
 
-Créer ansuite le Script Bash pour Munin 
+Create now bash script for Munin 
 
-`/usr/share/munin/plugins/ha2munin` avec ce contenu :
+```
+nano /usr/share/munin/plugins/ha2munin
+```
+
+
 ```bash
 #!/bin/bash
 
@@ -65,7 +69,14 @@ fi
 curl -s -H "Authorization: Bearer $TOKEN" "$HA_URL" | grep '\.value'
 ```
 
-
+Make executable
+```
+chmod +x /usr/share/munin/plugins/ha2munin
+```
+Activate in munin:
+```
+ln -s /usr/share/munin/plugins/ha2munin /etc/munin/plugins/ha2munin
+```
 
 ## TODO
 
