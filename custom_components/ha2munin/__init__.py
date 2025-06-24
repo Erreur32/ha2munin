@@ -1,5 +1,5 @@
-from .http import setup_view
+from .http import async_setup as setup_view
 
 async def async_setup(hass, config):
-    setup_view(hass)
+    await setup_view(hass, config)
     return True
