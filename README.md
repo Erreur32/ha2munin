@@ -9,6 +9,7 @@
 
 <img src="https://raw.githubusercontent.com/Erreur32/ha2munin/main/custom_components/ha2munin/icon.png" alt="Munin Logo" width="256"/>
 
+En Francais, English machine translation below:
 
 Expose facilement les statistiques de Home Assistant (CPU, RAM, températures, etc) au format compatible Munin, via une simple endpoint HTTP.
 
@@ -92,3 +93,72 @@ Erreur32
 ## Licence
 
 MIT
+
+
+# HA2Munin
+
+Summary  - Exposes Home Assistant statistics (CPU, RAM, temperatures, etc.) in Munin compatible format, via an HTTP endpoint, accessed using an api in HA.
+
+## Functionality
+
+- Endpoint ʼ/api/muninʼ exposed using python for query by a Munin plugin
+- Allows you to monitor Home Assistant data with Munin
+- Easy installation via HACS or custom_components
+
+---
+
+## Installation
+
+Added in HACS - HACS has been replaced by the Marketplace in HA 2026.11 release, the anglicised version of this Github repo only apply to versions 2026.11 and later.  
+
+- Open Settings > Marketplace
+- Click the checkbox 'I understand the risks and agree', the marketplace opens, with a long list.
+- Click the icon Add from linl
+- In the popup window Add from a Github link:
+- Paste 'https://github.com/rogerw-gh/ha2munin'
+- Then click the Add button, which bring up the Connect Github popup, follow the process to authenticate your Home Assistant instance with your Github account.
+- Installs integration from HACS
+- And add from integration the plugin (no config)
+
+- ## Usage
+
+The integration exposes values on an api :
+
+```bash
+http://<homeassistant>:8123/api/munin
+```
+
+
+## Creation Plugin munin
+
+Create an API authorisation token:
+
+
+Pour les authorisation créer un token via Homeassistant (/profile/security)
+
+Log into your munin instance and create the bash script for Munin:
+
+```
+nano /usr/share/munin/plugins/ha2munin
+```
+
+
+```bash
+#!/bin/bash
+
+# Adresse et token
+HA_URL="http://x.x.x.x:8123/api/munin"
+TOKEN=""
+
+if [ "$1" = "config" ]; then
+    echo "graph_title Home Assistant system_monitor"
+    echo "graph_category homeassistant"
+    curl -s -H "Authorization: Bearer $TOKEN" "$HA_URL" | grep '\.value' | while read line; do
+        name=$(echo "$line" | cut -d. -f1)
+        echo "$name.label $name"
+    done
+    exit 0
+fi
+
+curl -s -H "Authorization: Bearer $TOKEN" "$HA_URL" | grep '\.value'
+```
