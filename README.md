@@ -129,19 +129,26 @@ http://<homeassistant>:8123/api/munin
 ```
 
 
-## Creation Plugin munin
+## Create the Munin Plugin
 
 Create an API authorisation token:
 
-
-Pour les authorisation créer un token via Homeassistant (/profile/security)
+- In Home Assistant, click on you account name in the bottom left hand corner
+- Click on Security > Scroll down to Long-lived access tokens, click on Create token
+- Give the token a name, e.g. munin
+- Click on create token and then the Copy button, the puts the [very long] token into your past buffer, when you click Close, the token disappears and cannot be recovered
+- This token will be used in your bash script.
 
 Log into your munin instance and create the bash script for Munin:
 
 ```
-nano /usr/share/munin/plugins/ha2munin
+nano /usr/share/munin/plugins/ha2munin [assumes you have read/write access to /usr/share/munin/plugins], otherwise use nano or vi or vim with sudo.
+
+sudo nano
 ```
 
+Copy everything up to and including the curl command after fi.
+Make sure your system already has curl installed.
 
 ```bash
 #!/bin/bash
@@ -162,3 +169,13 @@ fi
 
 curl -s -H "Authorization: Bearer $TOKEN" "$HA_URL" | grep '\.value'
 ```
+
+Prepare the plugin by:
+
+- Making the plugin executable using:
+- sudo chmod +x /usr/share/munin/plugins/ha2munin
+- Run the configure stage:
+- sudo munin-run --servicedir /usr/share/munin/plugins ha2munin config
+- Test using:
+- sudo munin-run --servicedir /usr/share/munin/plugins ha2munin
+- If you get a Warning the execution of 'munin-run' via 'systemd-run, add --ignore-systemd-properties to the command.
