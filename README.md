@@ -113,7 +113,7 @@ Added in HACS - HACS has been replaced by the Marketplace in HA 2026.11 release,
 
 - Open Settings > Marketplace
 - Click the checkbox 'I understand the risks and agree', the marketplace opens, with a long list.
-- Click the icon Add from linl
+- Click the icon Add from link
 - In the popup window Add from a Github link:
 - Paste 'https://github.com/rogerw-gh/ha2munin'
 - Then click the Add button, which bring up the Connect Github popup, follow the process to authenticate your Home Assistant instance with your Github account.
@@ -139,6 +139,7 @@ Create an API authorisation token:
 - Click on create token and then the Copy button, the puts the [very long] token into your past buffer, when you click Close, the token disappears and cannot be recovered
 - This token will be used in your bash script.
 
+#Munin bash script
 Log into your munin instance and create the bash script for Munin:
 
 ```
